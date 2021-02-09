@@ -1,6 +1,4 @@
-package v1;
-
-public class Command
+ public class Command
 {
     private String aCommandWord;
     private String aSecondWord;

@@ -1,5 +1,3 @@
-package v1;
-
 public class Game
 {
     private Room aCurrentRoom ;

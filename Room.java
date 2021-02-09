@@ -1,6 +1,4 @@
-package v1;
-
-public class Room
+ public class Room
 {
     private String aDescription ;
     public Room aNorthExit;
