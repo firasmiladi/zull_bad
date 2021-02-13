@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -13,8 +12,8 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kolling and David J. Barnes + D.Bureau
- * @version 2008.03.30 + 2013.09.15
+ * @author  Michael Kolling and David J. Barnes + D.Bureau +Miladi Firas 
+ * @version 2008.03.30 + 2013.09.15 +2021.02.01
  */
 public class Parser 
 {
@@ -63,4 +62,11 @@ public class Parser
             return new Command( null, null ); // C'est surtout le premier null qui est important ici.
         }
     } // getCommand()
+    
+    /**
+     * print all Commands
+     */
+    public void showCommands(){
+        aValidCommands.showAll();
+    }//showCommands
 } // Parser
