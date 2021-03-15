@@ -47,4 +47,12 @@ public class CommandWords
         // if we get here, the string was not found in the commands
         return false;
     } // isCommand()
+    public String getCommandList() 
+    { 
+        String commandList = ""; 
+        for(String command : aValidCommands) { 
+            commandList += command + "  "; 
+        } 
+        return commandList; 
+    }
 } // CommandWords

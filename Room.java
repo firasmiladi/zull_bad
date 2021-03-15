@@ -14,16 +14,19 @@ public class Room
 {
     private String aDescription ;
     private HashMap<String, Room> aExits;
-    
+    /**/ private String aImageName;
+
     /**
      * Constructor - to create a room . 
      * 
     * @param The room's description.
     */
-    public Room(final String pdescription)
+    public Room(final String pDescription/**/, final String pImage)
     {
-        this.aDescription = pdescription;
+        this.aDescription = pDescription;
         aExits= new HashMap<String, Room> ();
+	/**/ this.aImageName = pImage;
+        
     }//Room
     
     /**
@@ -61,13 +64,10 @@ public class Room
      */
     public String getExitString()
     {
-        String returnString = "Exits: ";
-        Set<String> keys = aExits.keySet();
-        for(String vexit :keys)
-        {
-            returnString+=" " +vexit;
-        }
-        return returnString;
+        StringBuilder returnString = new StringBuilder("Exits: ");
+        for ( String vS : aExits.keySet() )
+            returnString.append( " " + vS );
+        return returnString.toString();
     }//getExitString
     
     /**
@@ -78,5 +78,12 @@ public class Room
     {
         return "You are "+ this.aDescription+"\n" +getExitString();
     }//getLongDescription
-    
-} // Room
+    /**
+     * Return a string describing the room's image name
+     */
+    /**/ public String getImageName()
+    /**/ {
+    /**/     return this.aImageName;
+    /**/ }
+}
+ // Room
