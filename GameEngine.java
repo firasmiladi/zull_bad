@@ -1,3 +1,4 @@
+import java.util.Stack;
 /**
  * Decrivez votre classe GameEngine ici.
  * 
@@ -9,6 +10,7 @@ public class GameEngine
     private Parser        aParser;
     private Room          aCurrentRoom;
     private UserInterface aGui;
+    private Stack<Room>   aBackRooms;
 
     /**
      * Constructor for objects of class GameEngine
@@ -17,6 +19,7 @@ public class GameEngine
     {
         this.aParser = new Parser();
         this.createRooms();
+        this.aBackRooms=new Stack<Room>();
     }
 
     public void setGUI( final UserInterface pUserInterface )
@@ -74,10 +77,13 @@ public class GameEngine
         Room vSupermarket = new Room ( "in Tesco Supermarket" , "outside.gif");
         
         Room vPolice = new Room ( "Next to the Police station", "outside.gif" );
-
+        
+        Item vgel = new Item ("gel",12,0.5);
+        vOffice.setItem (vgel);
+        
         //creation des rooms 
         vHouse.setExits("south",vPark1);
-        
+         
         
         vPark1.setExits("east",vHospital);
         vPark1.setExits("west",vLab);
@@ -157,7 +163,8 @@ public class GameEngine
      */
     private void look()
     {
-        System.out.println(this.aCurrentRoom.getLongDescription());
+
+        this.aGui.println(this.aCurrentRoom.getLongDescription());
     }//look
     
     /**
@@ -165,7 +172,7 @@ public class GameEngine
      */
     private void eat()
     {
-        System.out.println("You have eaten now and you are not hungry any more.");    
+       this.aGui.println("You have eaten now and you are not hungry any more.");    
     }//eat
     
     /**
@@ -191,14 +198,27 @@ public class GameEngine
         else if ( vCommandWord.equals( "eat" ) )
             this.eat(  );
         else if ( vCommandWord.equals( "look" ) )
-            this.look(  );
+            this.look();
         else if ( vCommandWord.equals( "quit" ) ) {
             if ( vCommand.hasSecondWord() )
                 this.aGui.println( "Quit what?" );
             else
                 this.endGame();
         }
+        if ( vCommandWord.equals( "back" ) ){
+            this.Back();
+        }
     }
+    
+    public void Back(){
+        //if(aBackRooms.empty()){}
+        this.aCurrentRoom=this.aBackRooms.pop();
+        this.printLocationInfo();   
+        if ( this.aCurrentRoom.getImageName() != null )
+                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        
+    }
+    
     /**
      * give,choose directions/exits 
      * @param desired direction 
@@ -215,12 +235,14 @@ public class GameEngine
 
         // Try to leave current room.
         Room vNextRoom = this.aCurrentRoom.getExit( vDirection );
-
+          
         if ( vNextRoom == null )
             this.aGui.println( "There is no door!" );
         else {
+            this.aBackRooms.push(this.aCurrentRoom); 
             this.aCurrentRoom = vNextRoom;
-            this.aGui.println( this.aCurrentRoom.getLongDescription() );
+            //this.aGui.println( this.aCurrentRoom.getLongDescription() );
+            this.printLocationInfo();   
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );
         }
@@ -250,9 +272,10 @@ public class GameEngine
 
     private void printLocationInfo()
     {
-        System.out.println("You are "+this.aCurrentRoom.getDescription());
-        System.out.print(this.aCurrentRoom.getExitString());
-        System.out.println();
+        this.aGui.println("You are "+this.aCurrentRoom.getDescription());
+        this.aGui.print(this.aCurrentRoom.getExitString());
+        this.aGui.println("");
+        this.aGui.boutonvisibility(this.aCurrentRoom);
         if ( this.aCurrentRoom.getImageName() != null )
             this.aGui.showImage( this.aCurrentRoom.getImageName() );
     }//printLocationInfo

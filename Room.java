@@ -15,7 +15,7 @@ public class Room
     private String aDescription ;
     private HashMap<String, Room> aExits;
     /**/ private String aImageName;
-
+     private Item aItem;
     /**
      * Constructor - to create a room . 
      * 
@@ -25,7 +25,7 @@ public class Room
     {
         this.aDescription = pDescription;
         aExits= new HashMap<String, Room> ();
-	/**/ this.aImageName = pImage;
+    /**/ this.aImageName = pImage;
         
     }//Room
     
@@ -76,8 +76,21 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are "+ this.aDescription+"\n" +getExitString();
+        return "You are "+ this.aDescription+"\n" +getExitString()+"\n"+ this.getItemString();
     }//getLongDescription
+    
+    public void setItem( final Item pItem){
+       this.aItem=pItem;
+    }
+    
+    public String getItemString(){
+        String vItem= "there is a item : ";
+        if (this.aItem!= null){
+            vItem+=this.aItem.getDescriptionItem();
+        }
+        else vItem = "there is no items here";
+        return vItem;
+    }
     /**
      * Return a string describing the room's image name
      */
