@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -5,54 +7,67 @@
  * This class holds an enumeration table of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
- * @author  Michael Kolling and David J. Barnes + D.Bureau
+ * @author  Firas Miladi
  * 
- * @version 2008.03.30 + 2019.09.25
+ * @version 10.04.2020
  */
 public class CommandWords
 {
     // a constant array that will hold all valid command words
-    private static final String[] aValidCommands=
-    {"go","help","quit","look","eat","back"};
+    private HashMap<String, CommandWord> avalidCommands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-            
-    } // CommandWords()
-    /**
-     * print all commands
-     */
-    public void showAll()
-    {
-        for(String vcommand : aValidCommands){
-            System.out.print(vcommand+" ");
+        this.avalidCommands = new HashMap<String, CommandWord>();
+        for(CommandWord vcommand : CommandWord.values()) {
+            if(vcommand != CommandWord.UNKNOWN) {
+                this.avalidCommands.put(vcommand.toString(), vcommand);
+            }
         }
-        System.out.println();
-    }//showAll
-
+    }
+    
     /**
      * Check whether a given String is a valid command word. 
      * @return true if a given string is a valid command,
      * false if it isn't.
+     * @param pString command input
      */
     public boolean isCommand( final String pString )
     {
-        for ( int i=0; i<this.aValidCommands.length; i++ ) {
-            if ( this.aValidCommands[i].equals( pString ) )
-                return true;
-        } // for
-        // if we get here, the string was not found in the commands
-        return false;
+        return this.avalidCommands.containsKey(pString);
     } // isCommand()
-    public String getCommandList() 
-    { 
-        String commandList = ""; 
-        for(String command : aValidCommands) { 
-            commandList += command + "  "; 
-        } 
-        return commandList; 
+    
+    /**
+     * Print all valid commands to System.out.
+     * @return all valid commands
+     */
+    public String showAll() 
+    {
+        StringBuilder returnString = new StringBuilder("");
+        
+        for ( String vS : avalidCommands.keySet() )
+                returnString.append( " " + vS );
+        return returnString.toString();
     }
-} // CommandWords
+    
+     /**
+     * Find the CommandWord associated with a command word.
+     * @param pCommandWord The word to look up.
+     * @return The CommandWord correspondng to commandWord, or UNKNOWN
+     *         if it is not a valid command word.
+     */
+    public CommandWord getCommandWord(String pCommandWord)
+    {
+        CommandWord vcommand = this.avalidCommands.get(pCommandWord);
+        if(vcommand != null) {
+            return vcommand;
+        }
+        else {
+            return CommandWord.UNKNOWN;
+        }
+    }
+}
+ // CommandWords

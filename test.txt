@@ -1,0 +1,27 @@
+take cookie 
+eat cookie 
+take beamer 
+load beamer 
+take gold
+take gel
+drop gel
+items
+go west
+go west
+take key
+go west
+go north
+go portal
+unlock portal
+go portal
+back 
+unlock portal
+back
+go north 
+go south
+teleport
+back 
+load
+eat 
+look 
+help 

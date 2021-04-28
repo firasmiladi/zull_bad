@@ -10,25 +10,26 @@
  */
  public class Command
 {
-    private String aCommandWord;
+    private CommandWord aCommandWord;
     private String aSecondWord;
     /**
      * Constructor - initialise the command words.
      * 
-     * @param  first word of the command  
-     * @param  second word of the command
+     * @param pCommandWord commandWord The CommandWord. UNKNOWN if the command word
+     *                  was not recognised.
+     * @param  pSecond:second word of the command
      */
-    public Command(final String pFirst ,final String pSecond) 
+    public Command(final CommandWord pCommandWord ,final String pSecond) 
     {
-        this.aCommandWord = pFirst;
+        this.aCommandWord = pCommandWord;
         this.aSecondWord = pSecond;
     }//Command
     
     /**
-     * get the first word of the command
-     * @return the first word of the command from the user.
+     * Return the command word (the first word) of this command.
+     * @return The command word.
      */
-    public String getCommandWord()
+    public CommandWord getCommandWord()
     {
         return this.aCommandWord;
     }//getCommandWord
@@ -59,6 +60,6 @@
      */
     public boolean isUnknown ()
     {
-        return this.aCommandWord == null ; 
+        return (this.aCommandWord  == this.aCommandWord .UNKNOWN); 
     }//isUnknown
 }// Command

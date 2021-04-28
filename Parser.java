@@ -1,4 +1,6 @@
 import java.util.StringTokenizer;
+import java.util.Scanner;
+
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -18,20 +20,24 @@ import java.util.StringTokenizer;
 public class Parser 
 {
     private CommandWords aValidCommands;  // (voir la classe CommandWords)
-
+    private Scanner aReader;
+    
     /**
      * Constructeur par defaut qui cree les 2 objets prevus pour les attributs
      */
     public Parser() 
     {
         this.aValidCommands = new CommandWords();
-        //this.aReader        = new Scanner( System.in );
-        // System.in designe le clavier, comme System.out designe l'ecran
+        this.aReader        = new Scanner( System.in );
     } // Parser()
 
-    public Command getCommand( final String pInputLine ) 
-    {
-        String vWord1;
+    /**
+     * get command
+     * @param pInputLine command    
+     * @return command from the user.
+     */
+    public Command getCommand(final String pInputLine) 
+    {   String vWord1;
         String vWord2;
 
         StringTokenizer tokenizer = new StringTokenizer( pInputLine );
@@ -51,14 +57,15 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
 
-        if ( this.aValidCommands.isCommand( vWord1 ) )
-            return new Command( vWord1, vWord2 );
-        else
-            return new Command( null, vWord2 );
-    } // getCommand(.)
+        return new Command(this.aValidCommands.getCommandWord(vWord1), vWord2);
+    }
     
-    public String getCommandList()
+    /**
+     * Print out a list of valid command words.
+     * @return list of command
+     */
+    public String showCommands()
     {
-        return aValidCommands.getCommandList();
+        return this.aValidCommands.showAll();
     }
     } // Parser

@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-
+import javax.swing.JTextArea;
 
 import java.net.URL;
 //import java.awt.image.*;
@@ -44,13 +44,12 @@ public class UserInterface implements ActionListener
     private JButton     aButtonEat;
     private JButton     aButtonLook;
     private JButton     aButtonHelp;
-    
     /**
      * Constru  ct a UserInterface. As a parameter, a Game Engine
      * (an object processing and executing the game commands) is
      * needed.
      * 
-     * @param gameEngine  The GameEngine object implementing the game logic.
+     * @param pGameEngine  The GameEngine object implementing the game logic.
      */
     public UserInterface( final GameEngine pGameEngine )
     {
@@ -60,6 +59,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Print out some text into the text area.
+     * @param pText text will be print into the text area
      */
     public void print( final String pText )
     {
@@ -69,6 +69,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Print out some text into the text area, followed by a line break.
+     * @param pText text will be print into the text area
      */
     public void println( final String pText )
     {
@@ -77,11 +78,12 @@ public class UserInterface implements ActionListener
 
     /**
      * Show an image file in the interface.
+     * @param pImageName image name
      */
     public void showImage( final String pImageName )
     {
         String vImagePath = "" + pImageName; // to change the directory
-        URL vImageURL = this.getClass().getClassLoader().getResource( vImagePath );
+        URL vImageURL = this.getClass().getClassLoader().getResource("image/"+vImagePath );
         if ( vImageURL == null )
             System.out.println( "Image not found : " + vImagePath );
         else {
@@ -93,6 +95,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Enable or disable input in the input field.
+     * @param pOnOff enable/disable
      */
     public void enable( final boolean pOnOff )
     {
@@ -103,6 +106,10 @@ public class UserInterface implements ActionListener
         }
     } // enable(.)
     
+    /**
+     * Enable or disable buttons if there is no exits.
+     * @param pRoom room
+     */
     public void boutonvisibility(Room pRoom){
         this.aButtonN.setVisible(pRoom.getExit("north")!=null);
         if (pRoom.getExit("north")==null){this.aButtonN.setVisible(false);}
@@ -126,7 +133,9 @@ public class UserInterface implements ActionListener
     {
         this.aMyFrame = new JFrame( "Zork" ); // change the title
         this.aEntryField = new JTextField( 34 );
-
+        
+        
+        
         
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -153,7 +162,10 @@ public class UserInterface implements ActionListener
         this.aMyFrame.addWindowListener( new WindowAdapter() {
                 public void windowClosing(WindowEvent e) { System.exit(0); }
             } );
-
+        this.aButtonN.setVisible(false);
+        this.aButtonS.setVisible(false);
+        this.aButtonE.setVisible(false);
+        
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
@@ -170,17 +182,20 @@ public class UserInterface implements ActionListener
         else if(pE.getSource() == this.aButtonS){ this.aEngine.interpretCommand("go south");}
         else if(pE.getSource() == this.aButtonE){ this.aEngine.interpretCommand("go east");}
         else if(pE.getSource() == this.aButtonW){ this.aEngine.interpretCommand("go west");}
-        else if(pE.getSource() == this.aButtonEat){ this.aEngine.interpretCommand("eat");}
+        else if(pE.getSource() == this.aButtonEat){ this.aEngine.interpretCommand("eat cookie");}
         else if(pE.getSource() == this.aButtonLook){ this.aEngine.interpretCommand("look");}
         else if(pE.getSource() == this.aButtonHelp){ this.aEngine.interpretCommand("help");}
         else if(pE.getSource() == this.aEntryField) {processCommand();}    
     } // actionPerformed(.)
 
+    /**
+     * make Bouton Bar.
+     */
     public void makeBoutonBar()
     {
         aButton = new JPanel();
         aButton.setLayout(new GridLayout(0,1,3,5));
-
+        
         this.aButtonN = new JButton("north");        
         this.aButtonN.addActionListener(this);
         this.aButtonN.setBackground(Color.RED);
@@ -197,7 +212,7 @@ public class UserInterface implements ActionListener
         this.aButtonW.addActionListener(this);
         this.aButtonW.setBackground(Color.MAGENTA   );
        
-        this.aButtonEat = new JButton("eat"); 
+        this.aButtonEat = new JButton("eat cookie"); 
         this.aButtonEat.addActionListener(this);
         this.aButtonEat.setBackground(Color.CYAN);
         
