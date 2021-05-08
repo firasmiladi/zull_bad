@@ -1,14 +1,17 @@
 /**
- * Decrivez votre classe CommandWord ici.
+ * This class is part of the "World of Zuul" application. 
+ * "World of Zuul" is a very simple, text based adventure game.  
  * 
- * @author (Firas miladi ) 
- * @version (20/04/2020)
+ * This class holds a table of all command words
+ * 
+ * @author Firas miladi  
+ * @version 20/04/2020
  */
 public enum CommandWord
 {
     // A value for each command word, plus one for unrecognised
     // commands.
-    GO("go"), QUIT("quit"), HELP("help"), LOOK("look"), EAT("eat"), BACK("back"), TAKE("take"), DROP("drop"), TEST("test"), ITEMS("items"), UNKNOWN("?"), LOAD("load"), TELEPORT("teleport"), LOCK("lock"),UNLOCK("unlock") ;
+    GO("go"), BACK("back") , HELP("help"), LOOK("look"), EAT("eat"), ALEA("alea"), TAKE("take"), DROP("drop"), TEST("test"), ITEMS("items"), UNKNOWN("?"), LOAD("load"), TELEPORT("teleport"), LOCK("lock"),UNLOCK("unlock"), QUIT("quit") ;
     
     private String aCommandString;
     /**

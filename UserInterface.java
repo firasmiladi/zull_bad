@@ -41,7 +41,8 @@ public class UserInterface implements ActionListener
     private JButton     aButtonS;
     private JButton     aButtonE;
     private JButton     aButtonW;
-    private JButton     aButtonEat;
+    private JButton     aButtonUp;
+    private JButton     aButtonDown;
     private JButton     aButtonLook;
     private JButton     aButtonHelp;
     /**
@@ -107,6 +108,24 @@ public class UserInterface implements ActionListener
     } // enable(.)
     
     /**
+     * Enable or disable buttons if there is no exits manually.
+     * @param pN north 
+     * @param pS south
+     * @param pW west
+     * @param pE East
+     * @param pdown down
+     * @param pup up
+     */
+    public void boutonvisibility(boolean pN,boolean pS,boolean pW,boolean pE,boolean pdown,boolean pup)
+    {
+        this.aButtonN.setVisible(pN);
+        this.aButtonS.setVisible(pS);
+        this.aButtonW.setVisible(pW);
+        this.aButtonE.setVisible(pE);
+        this.aButtonUp.setVisible(pup);
+        this.aButtonDown.setVisible(pdown);
+    }
+    /**
      * Enable or disable buttons if there is no exits.
      * @param pRoom room
      */
@@ -123,6 +142,12 @@ public class UserInterface implements ActionListener
         if (pRoom.getExit("east")==null){this.aButtonE.setVisible(false);}
         else {this.aButtonE.setVisible(true);}
         
+        if (pRoom.getExit("up")==null){this.aButtonUp.setVisible(false);}
+        else {this.aButtonUp.setVisible(true);}
+        
+        if (pRoom.getExit("down")==null){this.aButtonDown.setVisible(false);}
+        else {this.aButtonDown.setVisible(true);}
+        
         this.aMyFrame.pack();
     }
     
@@ -131,7 +156,7 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "Zork" ); // change the title
+        this.aMyFrame = new JFrame( "Firas Miladi" ); // change the title
         this.aEntryField = new JTextField( 34 );
         
         
@@ -165,6 +190,7 @@ public class UserInterface implements ActionListener
         this.aButtonN.setVisible(false);
         this.aButtonS.setVisible(false);
         this.aButtonE.setVisible(false);
+        this.aButtonDown.setVisible(false);
         
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
@@ -173,6 +199,7 @@ public class UserInterface implements ActionListener
 
     /**
      * Actionlistener interface for entry textfield.
+     * @param pE action created by the user
      */
     public void actionPerformed( final ActionEvent pE ) 
     {
@@ -182,7 +209,8 @@ public class UserInterface implements ActionListener
         else if(pE.getSource() == this.aButtonS){ this.aEngine.interpretCommand("go south");}
         else if(pE.getSource() == this.aButtonE){ this.aEngine.interpretCommand("go east");}
         else if(pE.getSource() == this.aButtonW){ this.aEngine.interpretCommand("go west");}
-        else if(pE.getSource() == this.aButtonEat){ this.aEngine.interpretCommand("eat cookie");}
+        else if(pE.getSource() == this.aButtonUp){ this.aEngine.interpretCommand("go up");}
+        else if(pE.getSource() == this.aButtonDown){ this.aEngine.interpretCommand("go down");}
         else if(pE.getSource() == this.aButtonLook){ this.aEngine.interpretCommand("look");}
         else if(pE.getSource() == this.aButtonHelp){ this.aEngine.interpretCommand("help");}
         else if(pE.getSource() == this.aEntryField) {processCommand();}    
@@ -210,11 +238,15 @@ public class UserInterface implements ActionListener
         
         this.aButtonW = new JButton("west");
         this.aButtonW.addActionListener(this);
-        this.aButtonW.setBackground(Color.MAGENTA   );
+        this.aButtonW.setBackground(Color.MAGENTA);
        
-        this.aButtonEat = new JButton("eat cookie"); 
-        this.aButtonEat.addActionListener(this);
-        this.aButtonEat.setBackground(Color.CYAN);
+        this.aButtonUp = new JButton("up"); 
+        this.aButtonUp.addActionListener(this);
+        this.aButtonUp.setBackground(Color.CYAN);
+        
+        this.aButtonDown = new JButton("down"); 
+        this.aButtonDown.addActionListener(this);
+        this.aButtonDown.setBackground(Color.CYAN);
         
         this.aButtonLook = new JButton("look"); 
         this.aButtonLook.addActionListener(this);
@@ -228,7 +260,8 @@ public class UserInterface implements ActionListener
         aButton.add( this.aButtonS);
         aButton.add( this.aButtonE);
         aButton.add( this.aButtonW);
-        aButton.add( this.aButtonEat);  
+        aButton.add( this.aButtonUp);  
+        aButton.add( this.aButtonDown);
         aButton.add( this.aButtonHelp);
         aButton.add( this.aButtonLook);
         

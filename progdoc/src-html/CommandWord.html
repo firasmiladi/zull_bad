@@ -8,33 +8,36 @@
 <main role="main">
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span><a id="line.1">/**</a>
-<span class="sourceLineNo">002</span><a id="line.2"> * Decrivez votre classe CommandWord ici.</a>
-<span class="sourceLineNo">003</span><a id="line.3"> * </a>
-<span class="sourceLineNo">004</span><a id="line.4"> * @author (Firas miladi ) </a>
-<span class="sourceLineNo">005</span><a id="line.5"> * @version (20/04/2020)</a>
-<span class="sourceLineNo">006</span><a id="line.6"> */</a>
-<span class="sourceLineNo">007</span><a id="line.7">public enum CommandWord</a>
-<span class="sourceLineNo">008</span><a id="line.8">{</a>
-<span class="sourceLineNo">009</span><a id="line.9">    // A value for each command word, plus one for unrecognised</a>
-<span class="sourceLineNo">010</span><a id="line.10">    // commands.</a>
-<span class="sourceLineNo">011</span><a id="line.11">    GO("go"), QUIT("quit"), HELP("help"), LOOK("look"), EAT("eat"), BACK("back"), TAKE("take"), DROP("drop"), TEST("test"), ITEMS("items"), UNKNOWN("?"), LOAD("load"), TELEPORT("teleport"), LOCK("lock"),UNLOCK("unlock") ;</a>
-<span class="sourceLineNo">012</span><a id="line.12">    </a>
-<span class="sourceLineNo">013</span><a id="line.13">    private String aCommandString;</a>
-<span class="sourceLineNo">014</span><a id="line.14">    /**</a>
-<span class="sourceLineNo">015</span><a id="line.15">     * Initialise with the corresponding command word.</a>
-<span class="sourceLineNo">016</span><a id="line.16">     * @param pCommandString The command string.</a>
-<span class="sourceLineNo">017</span><a id="line.17">     */</a>
-<span class="sourceLineNo">018</span><a id="line.18">    CommandWord(final String pCommandString)</a>
-<span class="sourceLineNo">019</span><a id="line.19">    {this.aCommandString    =    pCommandString;}</a>
-<span class="sourceLineNo">020</span><a id="line.20">    </a>
-<span class="sourceLineNo">021</span><a id="line.21">    /**</a>
-<span class="sourceLineNo">022</span><a id="line.22">     * @return The command word as a string.</a>
-<span class="sourceLineNo">023</span><a id="line.23">     */</a>
-<span class="sourceLineNo">024</span><a id="line.24">    public String toString()</a>
-<span class="sourceLineNo">025</span><a id="line.25">    {</a>
-<span class="sourceLineNo">026</span><a id="line.26">        return this.aCommandString;</a>
-<span class="sourceLineNo">027</span><a id="line.27">    }</a>
-<span class="sourceLineNo">028</span><a id="line.28">} // CommandWord</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * This class is part of the "World of Zuul" application. </a>
+<span class="sourceLineNo">003</span><a id="line.3"> * "World of Zuul" is a very simple, text based adventure game.  </a>
+<span class="sourceLineNo">004</span><a id="line.4"> * </a>
+<span class="sourceLineNo">005</span><a id="line.5"> * This class holds a table of all command words</a>
+<span class="sourceLineNo">006</span><a id="line.6"> * </a>
+<span class="sourceLineNo">007</span><a id="line.7"> * @author Firas miladi  </a>
+<span class="sourceLineNo">008</span><a id="line.8"> * @version 20/04/2020</a>
+<span class="sourceLineNo">009</span><a id="line.9"> */</a>
+<span class="sourceLineNo">010</span><a id="line.10">public enum CommandWord</a>
+<span class="sourceLineNo">011</span><a id="line.11">{</a>
+<span class="sourceLineNo">012</span><a id="line.12">    // A value for each command word, plus one for unrecognised</a>
+<span class="sourceLineNo">013</span><a id="line.13">    // commands.</a>
+<span class="sourceLineNo">014</span><a id="line.14">    GO("go"), BACK("back") , HELP("help"), LOOK("look"), EAT("eat"), ALEA("alea"), TAKE("take"), DROP("drop"), TEST("test"), ITEMS("items"), UNKNOWN("?"), LOAD("load"), TELEPORT("teleport"), LOCK("lock"),UNLOCK("unlock"), QUIT("quit") ;</a>
+<span class="sourceLineNo">015</span><a id="line.15">    </a>
+<span class="sourceLineNo">016</span><a id="line.16">    private String aCommandString;</a>
+<span class="sourceLineNo">017</span><a id="line.17">    /**</a>
+<span class="sourceLineNo">018</span><a id="line.18">     * Initialise with the corresponding command word.</a>
+<span class="sourceLineNo">019</span><a id="line.19">     * @param pCommandString The command string.</a>
+<span class="sourceLineNo">020</span><a id="line.20">     */</a>
+<span class="sourceLineNo">021</span><a id="line.21">    CommandWord(final String pCommandString)</a>
+<span class="sourceLineNo">022</span><a id="line.22">    {this.aCommandString    =    pCommandString;}</a>
+<span class="sourceLineNo">023</span><a id="line.23">    </a>
+<span class="sourceLineNo">024</span><a id="line.24">    /**</a>
+<span class="sourceLineNo">025</span><a id="line.25">     * @return The command word as a string.</a>
+<span class="sourceLineNo">026</span><a id="line.26">     */</a>
+<span class="sourceLineNo">027</span><a id="line.27">    public String toString()</a>
+<span class="sourceLineNo">028</span><a id="line.28">    {</a>
+<span class="sourceLineNo">029</span><a id="line.29">        return this.aCommandString;</a>
+<span class="sourceLineNo">030</span><a id="line.30">    }</a>
+<span class="sourceLineNo">031</span><a id="line.31">} // CommandWord</a>
 
 
 

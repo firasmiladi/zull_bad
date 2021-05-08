@@ -82,7 +82,7 @@ public class Room
      * @param pItem desired item
      */
     public void addItemroom  (Item pItem){
-        this.getRoomItemlist().addItemToTheList(pItem);
+        this.getRoomItemlist().addItemToTheList(pItem.getNounItem(),pItem);
     }
 
     /**
@@ -103,12 +103,12 @@ public class Room
     {
         if (aExits.size()==0){return "there is no exits";}
         else{
-        StringBuilder vReturnString = new StringBuilder("Exits: ");
-        
-        for ( String vS : aExits.keySet() )
-            vReturnString.append( " " + vS );
-        return vReturnString.toString();
-    }
+            StringBuilder vReturnString = new StringBuilder("Exits: ");
+            
+            for ( String vS : aExits.keySet() )
+                vReturnString.append( " " + vS );
+            return vReturnString.toString();
+        }
         
         
     }//getExitString
@@ -123,6 +123,7 @@ public class Room
         }
         return true ;
     }
+    
     /**
      * get the Doors in a String.
      * @return different doors in a String.
@@ -178,6 +179,11 @@ public class Room
     public boolean getLocked(String pDirection)
     {
         return this.aDoors.get(pDirection).getLocked();
+    }
+    
+    public boolean isExit(Room pRoom)
+    {
+        return this.aExits.containsValue(pRoom);
     }
     
     /**

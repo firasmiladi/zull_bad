@@ -1,5 +1,0 @@
-eat 
-look 
-help 
-go west 
-back 

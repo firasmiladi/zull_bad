@@ -1,3 +1,12 @@
+/**
+ * This class is part of the "World of Zuul" application. 
+ * "World of Zuul" is a very simple, text based adventure game.  
+ * 
+ * This class is used to trait Beamer used to teleport .
+ * 
+ * @author Firas miladi  
+ * @version 30/04/2020
+ */
 public class Beamer extends Item{
     private Room aSavedRoom;
     private boolean aLoaded;

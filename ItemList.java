@@ -1,5 +1,14 @@
 import java.util.HashMap;
 import java.util.Set;
+/**
+ * This class is part of the "World of Zuul" application. 
+ * "World of Zuul" is a very simple, text based adventure game.  
+ * 
+ * This class is used to trait inventories .
+ * 
+ * @author Firas miladi  
+ * @version 30/04/2020
+ */
 public class ItemList
 {   
     private HashMap<String, Item> aInventory;
@@ -18,21 +27,40 @@ public class ItemList
      */
     public Item getItemList(final String pItem)
     {   
-        return aInventory.get(pItem);
+        return this.aInventory.get(pItem);
     }
+    
     /**
     * @return HachMap of the items.
      */
     public HashMap<String, Item> getItemListhash()
     {   
-        return aInventory;
+        return this.aInventory;
+    }
+    
+    
+    /**
+    * @return the size of the HachMap .
+     */
+    public int getItemListsize()
+    {   
+        return this.aInventory.size();
+    }
+    
+    /**
+    * @return if an item is here or not. 
+    * @param pNom the item name
+     */
+    public boolean isExistValue(final String pNom)
+    {   
+        return this.aInventory.containsKey(pNom);
     }
     
     /**
      * print the items in the HachMap (player)
      * @return String with the items from the HachMap.
      */
-    public String getItemListStringPlayer()
+     public String getItemListStringPlayer()
     {
          if (this.aInventory.size()==0){
            return "there is no items in your inventory";
@@ -45,6 +73,7 @@ public class ItemList
         }
     }
     
+    
     /**
      * print the items in the HachMap(Room)
      * @return String with the items from the HachMap.
@@ -52,7 +81,7 @@ public class ItemList
     public String getItemListStringRoom()
     {
          if (this.aInventory.size()==0){
-           return "there is no items in the room";
+           return "There is no items in the room";
         }else{
             StringBuilder returnString = new StringBuilder("In this room, there is ");
             
@@ -60,7 +89,10 @@ public class ItemList
                 if (vS.equals("gold")){
                     String vI= this.getItemList(vS).getDescriptionItem();
                     returnString.append( " \n" + vI );
-                } else{
+                } else if (vS.equals("Sarah")||vS.equals("Alexa")){
+                    String vI= this.getItemList(vS).getDescriptionItem();
+                    returnString.append( " \n" + vI );
+                }else{
                 String vI= this.getItemList(vS).getLongDescriptionItem();
                 returnString.append( " \n" + vI );
             }
@@ -68,6 +100,7 @@ public class ItemList
             return returnString.toString();
         }
     }
+    
     
     /**
      * get the items's weight .
@@ -92,15 +125,6 @@ public class ItemList
     public void addItemToTheList (final String pItemString,final Item pItem) { 
         this.aInventory.put(pItemString,pItem);
     }
-    
-    /**
-     * add items .
-     * @param pItem item 
-     */
-    public void addItemToTheList (final Item pItem) { 
-        this.addItemToTheList(pItem.getNounItem(),pItem);
-    }
-    
     
     /**
      * remove items .

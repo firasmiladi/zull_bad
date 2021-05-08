@@ -1,13 +1,23 @@
 import java.util.HashMap;
 import java.util.Set;
+/**
+ * This class is part of the "World of Zuul" application. 
+ * "World of Zuul" is a very simple, text based adventure game.  
+ * 
+ * This class is used to trait Player .
+ * 
+ * @author Firas miladi  
+ * @version 30/04/2020
+ */
 public class Player{
     private Room          aCurrentRoom;
     private String        aName;
     private double        aOneRepMax;
+    private double        aHealth;
     private double        aMoney;
     private ItemList      aCatalogue;
     private double        aWeightInventory ;
-    
+    private ItemList      aCar;
     /**
      * Constructor
      * @param pName : get player's Name  .
@@ -19,7 +29,9 @@ public class Player{
         this.aMoney=pMoney;
         this.aOneRepMax = pWeight;        
         this.aCatalogue = new ItemList();
+        this.aCar = new ItemList();
         this.aWeightInventory = 0.0;
+        this.aHealth=1.0;
     }
     
     /**
@@ -36,7 +48,7 @@ public class Player{
     public String getItemListStringforPlayer()
     {
         return this.aCatalogue.getItemListStringPlayer();
-    }
+    }   
     
     /**
      * @return get player's One Rep Max.
@@ -60,6 +72,13 @@ public class Player{
         this.aCurrentRoom=pRoom;
     }
     
+    /**
+     * double player's One Rep Max.
+     */
+    public void doubleForce () { 
+        this.aOneRepMax=this.aOneRepMax*2;
+    }
+    
     
     /**
      * @return weight of the Inventory.
@@ -74,7 +93,7 @@ public class Player{
     public ItemList getPlayerItemlist()
     {
         return this.aCatalogue;
-    }//getRoomItemlist
+    }//getPlayerItemlist   
     
     /**
      * @return has the key or not 
@@ -89,11 +108,13 @@ public class Player{
     }
     
     /**
-     * double player's One Rep Max.
+     * @return winner or looser 
      */
-    public void doubleForce () { 
-        this.aOneRepMax=this.aOneRepMax*2;
+    public boolean checkWinner()
+    {
+       return this.aCar.isExistValue("Sarah") && this.aCar.isExistValue("Alexa");
     }
+    
     
     /**
      * print not hungry any more message
@@ -122,14 +143,39 @@ public class Player{
      * @param pItem Item 
      */
     public void addItemInventory (final String pNoun,final Item pItem) { 
+        
         if(pNoun.equals("gold")){
             this.aMoney=this.aMoney+2;
+       }
+       else if(pNoun.equals("Alexa")||pNoun.equals("Sarah")){
+            
+           this.aCar.addItemToTheList(pNoun,pItem);
+           
        }
         else{
             this.aCatalogue.addItemToTheList(pNoun,pItem); 
             this.aWeightInventory = this.aWeightInventory+pItem.getWeightItem();
             this.aMoney = this.aMoney-pItem.getPriceItem();
        }
+    }
+    
+    /**
+     * print not hungry any more message
+     * 
+     * @return String who is with the player  .
+     */
+    public String getNonPlayerlist()
+    {
+         if (this.aCar.getItemListsize()==0){
+           return "Your family need you, Keep searching !";
+        }else if(this.aCar.isExistValue("Sarah") && this.aCar.isExistValue("Alexa"))  {
+            return "your daughter and your wife are with you , hurry up go to your home !";
+        }else if (this.aCar.isExistValue("Sarah")){
+            return "your wife is with you , keep searching your daughter";
+        }else if (this.aCar.isExistValue("Alexa")){
+            return "your daughter is with you , keep searching your wife";
+        }
+        return "";
     }
     
     /**
@@ -162,17 +208,14 @@ public class Player{
         if (vItemRoom == null) {
             return "\n there is no such as this thing in this room ";
             
-        }else {
-            if (pCommand.equals("gold")){
-        
+        }else{
             this.addItemInventory(pCommand,vItemRoom);
             this.getCurrentRoom().getRoomItemlist().removeItemFromTheList(pCommand);
-            return "You added a " + vItemRoom.getDescriptionItem() + " to your wallet  ";
+            if (pCommand.equals("gold")){
+                return "You added a " + vItemRoom.getDescriptionItem() + " to your wallet  ";
             
-           } 
-           else {
-           this.addItemInventory(pCommand,vItemRoom);
-            this.getCurrentRoom().getRoomItemlist().removeItemFromTheList(pCommand);
+           }
+           else{
             return "You added a " + vItemRoom.getDescriptionItem() + " to your inventory  ";
           }
        }
@@ -212,11 +255,7 @@ public class Player{
               }
               
        }else{
-                return "you can't charge this item";
+           return "you can't charge this item";
        }
-       
     }
-    
-    
-    
 }

@@ -1,0 +1,8 @@
+go west 
+go south
+go west 
+go west 
+alea home
+go west 
+go south
+go south
