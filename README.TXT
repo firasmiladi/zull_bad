@@ -25,7 +25,7 @@ II.	Réponses aux exercices (à partir de l'exercice 7.5 inclus)
 •	Présentation du jeu
 
 Auteur :
-Je suis Miladi Firas du Groupe 8
+Je suis Miladi Firas 
 
 Thème :
 A Wuhan Un père cherche à sauver sa famille du virus mortel.
